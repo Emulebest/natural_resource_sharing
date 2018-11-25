@@ -5,5 +5,6 @@ urlpatterns = [
     path('profiles/', ProfileListCreateView.as_view()),
     path('profile/<int:pk>/', ProfileRetrieveView.as_view()),
     path('profile/<int:pk>/', ProfileEditView.as_view()),
-    path('profile/<int:pk>/', ProfileDeleteView.as_view())
+    path('profile/<int:pk>/', ProfileDeleteView.as_view()),
+    path('profile_region/<str:region>/', ProfileDeleteView.as_view())
 ]
