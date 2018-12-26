@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'django_extensions',
-    'user_profile'
+    'user_profile',
+    'wallet',
+    'device',
+    'transaction',
+    'water',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ),
 }
 
 

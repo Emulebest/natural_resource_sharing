@@ -5,6 +5,7 @@ services:
     ports:
       - 21000:21000
       - 30303:30303
+      - 8545:8545
     command: >
                --ws-interface all
                --jsonrpc-interface all

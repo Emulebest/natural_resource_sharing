@@ -6,4 +6,4 @@ class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
         fields = ('id', 'address', 'name')
-        read_only = ('user',)
+        # read_only = ('user',)

@@ -4,5 +4,5 @@ from django.db import models
 
 class Device(models.Model):
     name = models.CharField(max_length=100)
-    address = models.CharField()
+    address = models.TextField()
     user = models.OneToOneField(User, on_delete=models.CASCADE)
