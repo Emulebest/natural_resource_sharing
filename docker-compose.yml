@@ -26,10 +26,28 @@ services:
                --ws-port 21000
                --auto-update none
     volumes:
-      - parity:/root/parity
+      - ./parity:/root/parity
     working_dir: /root/parity
     entrypoint: /home/parity/bin/parity
     user: root
+
+  django:
+    command: /bin/sh -c "pip install -r requirements.txt && python manage.py runserver 8000"
+    image: python:3.6
+    working_dir: /code
+    volumes:
+      - ./:/code
+    ports:
+      - 8000:8000
+
+  node:
+    command: /bin/sh -c "npm i && npm start"
+    image: node:8.15
+    working_dir: /code
+    volumes:
+      - ./web:/code
+    ports:
+      - 3000:3000
 volumes:
   parity:
     external:
