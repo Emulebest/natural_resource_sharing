@@ -23,19 +23,18 @@ class ProfileFilterView(APIView):
         return Response({"users": users}, status=status.HTTP_200_OK)
 
 
-class ProfileRetrieveView(generics.RetrieveAPIView):
+class ProfileExistsView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        try:
+            profile = Profile.objects.get(user=request.user)
+            return Response({"result": True, "id": profile.id})
+        except Profile.DoesNotExist:
+            return Response({"result": False})
+
+
+class ProfileEditDeleteRetrieveView(generics.RetrieveAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated,)
-
-
-class ProfileEditView(generics.UpdateAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated, IsOwner)
-
-
-class ProfileDeleteView(generics.DestroyAPIView):
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated, IsOwner)

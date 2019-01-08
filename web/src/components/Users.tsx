@@ -3,6 +3,7 @@ import {UserStore} from "../store/user";
 import * as React from "react";
 import {RouterStore, syncHistoryWithStore} from "mobx-react-router"
 import {NavBar} from "./NavBar";
+import {withRouter} from "react-router";
 
 interface MyProps {
     msg: string
@@ -15,6 +16,8 @@ interface InjectedProps extends MyProps {
 
 
 @inject("users")
+// @ts-ignore
+@withRouter
 @observer
 export class UsersComponent extends React.Component<MyProps, {}> {
     get injected() {

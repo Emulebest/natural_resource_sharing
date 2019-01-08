@@ -1,15 +1,30 @@
 import * as React from "react";
-import {Route} from "react-router";
+import {Route, withRouter} from "react-router";
 import {UserRoutes} from "./users";
 import {NavBar} from "../components/NavBar";
 import {Footer} from "../components/Footer";
+import {Login} from "../components/Login";
+import {Register} from "../components/Register";
+import {Profile} from "../components/Profile";
+import {Home} from "../components/Home";
+import {PrivateRoute} from "./private";
+import {PersonalProfile} from "../components/PersonalProfile";
+import {observer} from "mobx-react";
 
+// @ts-ignore
+@withRouter
+@observer
 export class MainRouter extends React.Component {
     render() {
         return (
             <div>
                 <NavBar/>
-                <Route path={"/users"} component={UserRoutes}/>
+                <PrivateRoute path={"/users"} component={UserRoutes}/>
+                <PrivateRoute path={"/my_profile"} component={PersonalProfile}/>
+                <Route path={"/login"} component={Login}/>
+                <Route path={"/register"} component={Register}/>
+                <Route path={"/profile"} component={Profile}/>
+                <PrivateRoute path={"/home"} component={Home}/>
                 <Footer/>
             </div>
         )
