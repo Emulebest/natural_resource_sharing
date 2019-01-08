@@ -11,4 +11,7 @@ export class ProfileStore {
         this.profile_id = id;
     }
 
+    emptyStore() {
+        this.profile_id = null;
+    }
 }

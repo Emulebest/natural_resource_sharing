@@ -10,6 +10,7 @@ import {Home} from "../components/Home";
 import {PrivateRoute} from "./private";
 import {PersonalProfile} from "../components/PersonalProfile";
 import {observer} from "mobx-react";
+import {Devices} from "../components/Devices";
 
 // @ts-ignore
 @withRouter
@@ -21,6 +22,7 @@ export class MainRouter extends React.Component {
                 <NavBar/>
                 <PrivateRoute path={"/users"} component={UserRoutes}/>
                 <PrivateRoute path={"/my_profile"} component={PersonalProfile}/>
+                <PrivateRoute component={Devices} path={"/devices"}/>
                 <Route path={"/login"} component={Login}/>
                 <Route path={"/register"} component={Register}/>
                 <Route path={"/profile"} component={Profile}/>

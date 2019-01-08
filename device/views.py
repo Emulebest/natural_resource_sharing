@@ -15,3 +15,9 @@ class DeviceListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class DeviceRetrieveEditDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = DeviceSerializer
+    queryset = Device.objects.all()

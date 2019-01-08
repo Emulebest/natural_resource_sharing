@@ -19,7 +19,8 @@ from django.urls import path, include
 
 
 main_urls = [
-    path('profile/', include('user_profile.urls'))
+    path('profile/', include('user_profile.urls')),
+    path('device/', include('device.urls'))
 ]
 
 urlpatterns = [

@@ -14,5 +14,9 @@ export class UserStore {
 
     createUser = () => {
         this.users.push({id: 1, name: "hello"})
+    };
+
+    emptyStore() {
+        this.users = [];
     }
 }

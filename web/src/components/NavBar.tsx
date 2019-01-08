@@ -1,13 +1,13 @@
 import * as React from "react";
 import {inject, observer} from "mobx-react";
-import {RouterStore, syncHistoryWithStore} from "mobx-react-router"
 import {UserStore} from "../store/user";
 import {Link} from "react-router-dom"
 import "../styles/navbar.css"
 import {LoggedStore} from "../store/logged";
 import {ProfileStore} from "../store/profile";
 import {httpWithHeaders} from "../utils/custom_http";
-import {withRouter} from "react-router";
+import {Redirect, withRouter} from "react-router";
+import {DeviceStore} from "../store/devices";
 
 interface Props {
 
@@ -15,10 +15,12 @@ interface Props {
 
 interface InjectedProps extends Props {
     logged: LoggedStore,
-    profile: ProfileStore
+    profile: ProfileStore,
+    devices: DeviceStore,
+    users: UserStore
 }
 
-@inject("logged", "profile")
+@inject("logged", "profile", "devices", "users")
 // @ts-ignore
 @withRouter
 @observer
@@ -34,6 +36,9 @@ export class NavBar extends React.Component<Props, {}> {
         localStorage.removeItem("username");
         this.injected.logged.removeUser();
         this.setState({is_logged: false});
+        this.injected.devices.emptyStore();
+        this.injected.profile.emptyStore();
+        this.injected.users.emptyStore();
     };
 
     render() {
@@ -47,7 +52,7 @@ export class NavBar extends React.Component<Props, {}> {
                         <li><Link to={"/users"}>Users</Link></li>
                         <li><Link to={"/home"}>Home</Link></li>
                         <li><Link to={"/my_profile"}>Profile</Link></li>
-                        <li><Link to={"/device"}>Devices</Link></li>
+                        <li><Link to={"/devices"}>Devices</Link></li>
                         <li><Link to={"/water"}>Water supply</Link></li>
                         <li><a href={"/logout"} onClick={this.logout}>Logout</a></li>
                     </ul>
@@ -55,15 +60,7 @@ export class NavBar extends React.Component<Props, {}> {
             )
         } else {
             return (
-                <>
-                    <h1>
-                        I am nav bar
-                    </h1>
-                    <ul>
-                        <li><Link to={"/login"}> Login </Link></li>
-
-                    </ul>
-                </>
+                <Redirect to={"/login"}/>
             )
         }
     }

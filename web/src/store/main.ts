@@ -4,11 +4,13 @@ import {routingStore} from "./routing";
 import {UserStore} from "./user";
 import {LoggedStore} from "./logged";
 import {ProfileStore} from "./profile";
+import {DeviceStore} from "./devices";
 
 
 export const appState = {
     routing: new RouterStore(),
     users: new UserStore(),
     logged: new LoggedStore(),
-    profile: new ProfileStore()
+    profile: new ProfileStore(),
+    devices: new DeviceStore()
 };
