@@ -2,7 +2,7 @@ import * as React from "react";
 import axios from "axios"
 import {inject, observer} from "mobx-react";
 import {LoggedStore} from "../store/logged";
-import {withRouter} from "react-router";
+import {Redirect, withRouter} from "react-router";
 
 interface Props {
 
@@ -18,10 +18,11 @@ interface InjectedProps extends Props {
 @observer
 export class Register extends React.Component<Props> {
     state = {
-      username: "",
-      email: "",
-      password: "",
-      password2: ""
+        username: "",
+        email: "",
+        password: "",
+        password2: "",
+        redirect: false
     };
 
     get injected() {
@@ -37,18 +38,29 @@ export class Register extends React.Component<Props> {
         });
         localStorage.setItem("token", result.data.key);
         localStorage.setItem("username", this.state.username);
-        this.injected.logged.setUser(this.state.username, result.data.key)
+        this.injected.logged.setUser(this.state.username, result.data.key);
+        this.setState({redirect: true})
     };
 
     render() {
-        return (
-            <div>
-                <input type="text" placeholder="Username" onChange={(e) => this.setState({"username": e.target.value})}/>
-                <input type="text" placeholder="Email" onChange={(e) => this.setState({"email": e.target.value})}/>
-                <input type="text" placeholder="Password" onChange={(e) => this.setState({"password": e.target.value})}/>
-                <input type="text" placeholder="Password2" onChange={(e) => this.setState({"password2": e.target.value})}/>
-                <button onClick={this.handleSubmit}>Submit</button>
-            </div>
-        )
+        if (!this.state.redirect) {
+            return (
+                <div>
+                    <input type="text" placeholder="Username"
+                           onChange={(e) => this.setState({"username": e.target.value})}/>
+                    <input type="text" placeholder="Email" onChange={(e) => this.setState({"email": e.target.value})}/>
+                    <input type="text" placeholder="Password"
+                           onChange={(e) => this.setState({"password": e.target.value})}/>
+                    <input type="text" placeholder="Password2"
+                           onChange={(e) => this.setState({"password2": e.target.value})}/>
+                    <button onClick={this.handleSubmit}>Submit</button>
+                </div>
+            )
+        } else {
+            return (
+                <Redirect to={"/profile"}/>
+            )
+        }
+
     }
 }

@@ -5,6 +5,8 @@ import {UserStore} from "./user";
 import {LoggedStore} from "./logged";
 import {ProfileStore} from "./profile";
 import {DeviceStore} from "./devices";
+import {WaterStore} from "./water";
+import {WalletStore} from "./wallet";
 
 
 export const appState = {
@@ -12,5 +14,7 @@ export const appState = {
     users: new UserStore(),
     logged: new LoggedStore(),
     profile: new ProfileStore(),
-    devices: new DeviceStore()
+    devices: new DeviceStore(),
+    water: new WaterStore(),
+    wallet: new WalletStore()
 };

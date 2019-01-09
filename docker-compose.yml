@@ -7,6 +7,8 @@ services:
       - 30303:30303
       - 8545:8545
     command: >
+               --jsonrpc-apis personal
+               --chain dev
                --ws-interface all
                --jsonrpc-interface all
                --base-path /root/parity

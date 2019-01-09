@@ -10,3 +10,8 @@ class WatterSupplyListApiView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class WatterRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = WatterSupplySerializer
+    queryset = WaterSupply.objects.all()

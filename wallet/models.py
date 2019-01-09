@@ -7,4 +7,5 @@ from django.db import models
 class Wallet(models.Model):
     address = models.TextField()
     balance = models.FloatField(default=0)
+    password = models.TextField(null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)

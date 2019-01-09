@@ -53,7 +53,7 @@ export class NavBar extends React.Component<Props, {}> {
                         <li><Link to={"/home"}>Home</Link></li>
                         <li><Link to={"/my_profile"}>Profile</Link></li>
                         <li><Link to={"/devices"}>Devices</Link></li>
-                        <li><Link to={"/water"}>Water supply</Link></li>
+                        <li><Link to={"/water"}>Water supply & Wallet</Link></li>
                         <li><a href={"/logout"} onClick={this.logout}>Logout</a></li>
                     </ul>
                 </>

@@ -67,7 +67,7 @@ export class Login extends React.Component<Props> {
             )
         } else {
             return (
-                <Redirect to={"/profile"}/>
+                <Redirect to={"/devices"}/>
             )
         }
 
