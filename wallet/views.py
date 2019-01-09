@@ -10,12 +10,14 @@ class WalletListView(generics.ListAPIView):
 
     def get_queryset(self):
         w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
-        wallet = Wallet.objects.get(user=self.request.user)
+        wallets = Wallet.objects.filter(user=self.request.user)
+        wallet = wallets[0]
         eth = Eth(w3)
         balance = eth.getBalance(wallet.address)
+        print(balance)
         wallet.balance = balance
         wallet.save()
-        return wallet
+        return wallets
 
 
 class WalletRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):

@@ -2,8 +2,8 @@ from rest_framework import serializers
 from .models import *
 
 
-class WatterSupplySerializer(serializers.ModelSerializer):
+class WaterSupplySerializer(serializers.ModelSerializer):
     class Meta:
         model = WaterSupply
-        fields = ('quantity',)
-        read_only = ('user', 'id')
+        fields = ('quantity', 'user', 'id')
+        read_only_fields = ('user', 'id')

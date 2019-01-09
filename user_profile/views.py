@@ -10,6 +10,7 @@ from user_profile.serilalizers import ProfileSerializer
 from user_profile.utils import randomword
 from wallet.models import Wallet
 from .permissions import *
+from water.models import *
 
 
 class ProfileListCreateView(generics.ListCreateAPIView):
@@ -24,6 +25,7 @@ class ProfileListCreateView(generics.ListCreateAPIView):
         password = randomword(10)
         address = personal.newAccount(password)
         Wallet.objects.create(address=address, user=self.request.user, balance=0, password=password)
+        WaterSupply.objects.create(user=self.request.user, quantity=0)
 
 
 class ProfileFilterView(APIView):

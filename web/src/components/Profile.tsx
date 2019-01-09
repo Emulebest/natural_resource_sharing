@@ -38,7 +38,8 @@ export class Profile extends React.Component<Props> {
             city: this.state.city,
             country: this.state.country
         });
-        this.setState({has_profile: true})
+        this.setState({has_profile: true});
+        this.injected.profile.setProfile(res.data.id);
     };
 
     render() {
@@ -50,9 +51,11 @@ export class Profile extends React.Component<Props> {
             return (
                 <div>
                     <input type="text" placeholder="Name" onChange={(e) => this.setState({name: e.target.value})}/>
-                    <input type="text" placeholder="Surname" onChange={(e) => this.setState({surname: e.target.value})}/>
+                    <input type="text" placeholder="Surname"
+                           onChange={(e) => this.setState({surname: e.target.value})}/>
                     <input type="text" placeholder="City" onChange={(e) => this.setState({city: e.target.value})}/>
-                    <input type="text" placeholder="Country" onChange={(e) => this.setState({country: e.target.value})}/>
+                    <input type="text" placeholder="Country"
+                           onChange={(e) => this.setState({country: e.target.value})}/>
                     <button onClick={this.handleSubmit}>Submit</button>
                 </div>
             )

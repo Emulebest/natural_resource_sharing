@@ -8,6 +8,8 @@ import {ProfileStore} from "../store/profile";
 import {httpWithHeaders} from "../utils/custom_http";
 import {Redirect, withRouter} from "react-router";
 import {DeviceStore} from "../store/devices";
+import {WaterStore} from "../store/water";
+import {WalletStore} from "../store/wallet";
 
 interface Props {
 
@@ -17,10 +19,12 @@ interface InjectedProps extends Props {
     logged: LoggedStore,
     profile: ProfileStore,
     devices: DeviceStore,
-    users: UserStore
+    users: UserStore,
+    water: WaterStore,
+    wallet: WalletStore
 }
 
-@inject("logged", "profile", "devices", "users")
+@inject("logged", "profile", "devices", "users", "water", "wallet")
 // @ts-ignore
 @withRouter
 @observer
@@ -39,10 +43,12 @@ export class NavBar extends React.Component<Props, {}> {
         this.injected.devices.emptyStore();
         this.injected.profile.emptyStore();
         this.injected.users.emptyStore();
+        this.injected.water.emptyStore();
+        this.injected.wallet.emptyStore();
     };
 
     render() {
-        if (this.injected.logged.is_logged) {
+        if (this.injected.logged.is_logged && this.injected.profile.profile_isset) {
             return (
                 <>
                     <h1>
@@ -57,6 +63,10 @@ export class NavBar extends React.Component<Props, {}> {
                         <li><a href={"/logout"} onClick={this.logout}>Logout</a></li>
                     </ul>
                 </>
+            )
+        } else if (this.injected.logged.is_logged) {
+            return (
+                null
             )
         } else {
             return (

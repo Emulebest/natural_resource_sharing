@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {computed, observable} from "mobx";
 
 export class ProfileStore {
     @observable profile_id: number | null;
@@ -9,6 +9,10 @@ export class ProfileStore {
 
     setProfile(id: number) {
         this.profile_id = id;
+    }
+
+    @computed get profile_isset(): boolean {
+        return this.profile_id !== null;
     }
 
     emptyStore() {

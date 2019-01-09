@@ -26,4 +26,8 @@ export class WaterStore {
         this.amount = amount;
     }
 
+    setId(id: number) {
+        this.id = id;
+    }
+
 }

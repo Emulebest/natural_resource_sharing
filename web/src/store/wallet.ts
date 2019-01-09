@@ -11,14 +11,6 @@ export class WalletStore {
         this.id = null;
     }
 
-    add(amount: number) {
-        this.amount += amount
-    }
-
-    substract(amount: number) {
-        this.amount -= amount
-    }
-
     emptyStore() {
         this.amount = 0;
         this.address = null;
@@ -26,6 +18,14 @@ export class WalletStore {
     }
 
     setAmount(amount: number) {
-        this.amount = amount;
+        this.amount = WalletStore.wei_to_eth(amount);
+    }
+
+    static wei_to_eth(amount: number): number {
+        return amount / 1000000000000000000
+    }
+
+    setId(id: number) {
+        this.id = id;
     }
 }
