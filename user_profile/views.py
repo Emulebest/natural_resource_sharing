@@ -20,7 +20,7 @@ class ProfileListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-        w3 = Web3(Web3.HTTPProvider("http://parity:8545"))
+        w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
         personal = Personal(w3)
         password = randomword(10)
         address = personal.newAccount(password)

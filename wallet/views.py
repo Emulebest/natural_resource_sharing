@@ -9,7 +9,7 @@ class WalletListView(generics.ListAPIView):
     serializer_class = WalletSerializer
 
     def get_queryset(self):
-        w3 = Web3(Web3.HTTPProvider("http://parity:8545"))
+        w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
         wallets = Wallet.objects.filter(user=self.request.user)
         wallet = wallets[0]
         eth = Eth(w3)

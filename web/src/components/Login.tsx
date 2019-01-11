@@ -5,16 +5,19 @@ import {Link} from "react-router-dom"
 import axios from "axios"
 import {Redirect} from "react-router-dom"
 import {withRouter} from "react-router";
+import {httpWithHeaders} from "../utils/custom_http";
+import {ProfileStore} from "../store/profile";
 
 interface Props {
 
 }
 
 interface InjectedProps extends Props {
-    logged: LoggedStore
+    logged: LoggedStore,
+    profile: ProfileStore
 }
 
-@inject("logged")
+@inject("logged", "profile")
 // @ts-ignore
 @withRouter
 @observer
@@ -24,7 +27,8 @@ export class Login extends React.Component<Props> {
         email: "",
         password: "",
         error: "",
-        redirect: false
+        redirect: false,
+        redirectProfile: false,
     };
 
     get injected() {
@@ -41,14 +45,25 @@ export class Login extends React.Component<Props> {
             this.injected.logged.setUser(this.state.username, res.data.key);
             localStorage.setItem("token", res.data.key);
             localStorage.setItem("username", this.state.username);
-            this.setState({error: ""});
-            this.setState({redirect: true})
+            const profile_res = await httpWithHeaders().get("/profile/exists/");
+            if (res.data.result) {
+                this.injected.profile.setProfile(profile_res.data.id);
+                this.setState({error: ""});
+                this.setState({redirect: true})
+            } else {
+                this.setState({error: "", redirectProfile: true})
+            }
         } catch (e) {
             this.setState({error: "Something went wrong"})
         }
     };
 
     render() {
+        if (this.state.redirectProfile) {
+            return (
+                <Redirect to={"/profile"}/>
+            )
+        }
         if (!this.state.redirect) {
             return (
                 <div>
