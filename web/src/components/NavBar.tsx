@@ -50,33 +50,34 @@ export class NavBar extends React.Component<Props, {}> {
     render() {
         if (this.injected.logged.is_logged && this.injected.profile.profile_isset) {
             return (
-                <nav className = "navbar navbar-expand-lg navbar-light bg-light">
-                    <a className="navbar-brand" href="#">
-                        <img src="http://www.uwyo.edu/haub/_files/_images/academics/icons/minor.png" width="30" height="30" alt=""/>
-                    </a>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="nav-item active">
-                                <a className="nav-link"><Link to={"/users"}>Users</Link></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link"><Link to={"/home"}>Home</Link></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link"><Link to={"/my_profile"}>Profile</Link></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link"><Link to={"/devices"}>Devices</Link></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link"><Link to={"/water"}>Water supply & Wallet</Link></a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link"><a href={"/logout"} onClick={this.logout}>Logout</a></a>
-                            </li>
-                        </ul>
-                    </div>
+                <nav className="navbar navbar-default">
+                    <div className="container">
+                        <div className="navbar-header">
+                            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-collapse-2">
+                                <span className="sr-only">Toggle navigation</span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                            </button>
+                            <a className="navbar-brand" href="#">Brand</a>
+                        </div>
+                        <div className="collapse navbar-collapse" id="navbar-collapse-2">
+          <ul className="nav navbar-nav navbar-right">
+            <li><a><Link to={"/home"}>Home</Link></a></li>
+            <li><a><Link to={"/users"}>Users</Link></a></li>
+            <li><a href="#"><Link to={"/my_profile"}>Profile</Link></a></li>
+            <li><a href="#"><Link to={"/devices"}>Devices</Link></a></li>
+            <li><a href="#"><Link to={"/water"}>Water supply & Wallet</Link></a></li>
+            <li>
+              <a className="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse"  aria-expanded="false" aria-controls="nav-collapse2" href={"/logout"} onClick={this.logout}>Logout</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
                 </nav>
+
             )
         } else if (this.injected.logged.is_logged) {
             return (
