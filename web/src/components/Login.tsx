@@ -56,7 +56,7 @@ export class Login extends React.Component<Props> {
                 this.setState({error: "", redirectProfile: true})
             }
         } catch (e) {
-            this.setState({error: "Something went wrong"})
+            this.setState({error: "User is not found"})
         }
     };
 

@@ -12,6 +12,7 @@ import {WalletStore} from "../store/wallet";
 import {MarketStore} from "../store/market";
 
 import "../styles/navbar.css"
+
 interface Props {
 
 }
@@ -64,34 +65,22 @@ export class NavBar extends React.Component<Props, {}> {
                             <a className="navbar-brand" href="#">Brand</a>
                         </div>
                         <div className="collapse navbar-collapse" id="navbar-collapse-2">
-          <ul className="nav navbar-nav navbar-right">
-            <li><a><Link to={"/home"}>Home</Link></a></li>
-            <li><a><Link to={"/users"}>Users</Link></a></li>
-            <li><a href="#"><Link to={"/my_profile"}>Profile</Link></a></li>
-            <li><a href="#"><Link to={"/devices"}>Devices</Link></a></li>
-            <li><a href="#"><Link to={"/water"}>Water supply & Wallet</Link></a></li>
-            <li>
-              <a className="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse"  aria-expanded="false" aria-controls="nav-collapse2" href={"/logout"} onClick={this.logout}>Logout</a>
-            </li>
-          </ul>
+                            <ul className="nav navbar-nav navbar-right">
+                                <li><a><Link to={"/home"}>Home</Link></a></li>
+                                <li><a><Link to={"/market"}>Market</Link></a></li>
+                                <li><a href="#"><Link to={"/my_profile"}>Profile</Link></a></li>
+                                <li><a href="#"><Link to={"/devices"}>Devices</Link></a></li>
+                                <li><a href="#"><Link to={"/water"}>Water supply & Wallet</Link></a></li>
+                                <li>
+                                    <a className="btn btn-default btn-outline btn-circle collapsed"
+                                       data-toggle="collapse" aria-expanded="false" aria-controls="nav-collapse2"
+                                       href={"/logout"} onClick={this.logout}>Logout</a>
+                                </li>
+                            </ul>
 
-        </div>
-      </div>
+                        </div>
+                    </div>
                 </nav>
-
-                <>
-                    <h1>
-                        I am nav bar
-                    </h1>
-                    <ul>
-                        <li><Link to={"/market"}>Market</Link></li>
-                        <li><Link to={"/home"}>Home</Link></li>
-                        <li><Link to={"/my_profile"}>Profile</Link></li>
-                        <li><Link to={"/devices"}>Devices</Link></li>
-                        <li><Link to={"/water"}>Water supply & Wallet</Link></li>
-                        <li><a href={"/logout"} onClick={this.logout}>Logout</a></li>
-                    </ul>
-                </>
             )
         } else if (this.injected.logged.is_logged) {
             return (
