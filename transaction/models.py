@@ -15,11 +15,11 @@ class BuySell(Enum):
 
 
 class WaterRequest(models.Model):
-    mode = models.TextField(choices=[(tag, tag.value) for tag in BuySell])
+    mode = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="requester")
     price = models.FloatField()
     amount = models.FloatField()
-    status = models.TextField(choices=[(tag, tag.value) for tag in StatusChoices])
+    status = models.TextField(choices=[(tag, tag.value) for tag in StatusChoices], default="open")
 
 
 class WaterTransaction(models.Model):

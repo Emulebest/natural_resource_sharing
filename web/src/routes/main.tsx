@@ -1,6 +1,5 @@
 import * as React from "react";
 import {Route, withRouter} from "react-router";
-import {UserRoutes} from "./users";
 import {NavBar} from "../components/NavBar";
 import {Footer} from "../components/Footer";
 import {Login} from "../components/Login";
@@ -12,6 +11,7 @@ import {PersonalProfile} from "../components/PersonalProfile";
 import {observer} from "mobx-react";
 import {Devices} from "../components/Devices";
 import {WaterWallet} from "../components/WaterWallet";
+import {Market} from "../components/Market";
 
 // @ts-ignore
 @withRouter
@@ -21,10 +21,10 @@ export class MainRouter extends React.Component {
         return (
             <div>
                 <NavBar/>
-                <PrivateRoute path={"/users"} component={UserRoutes}/>
                 <PrivateRoute path={"/my_profile"} component={PersonalProfile}/>
                 <PrivateRoute component={Devices} path={"/devices"}/>
                 <PrivateRoute component={WaterWallet} path={"/water"}/>
+                <PrivateRoute component={Market} path={"/market"}/>
                 <Route path={"/login"} component={Login}/>
                 <Route path={"/register"} component={Register}/>
                 <Route path={"/profile"} component={Profile}/>

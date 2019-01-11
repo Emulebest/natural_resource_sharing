@@ -8,4 +8,4 @@ class Device(models.Model):
     address_off = models.TextField(null=True)
     purpose = models.TextField(null=True)
     liter_per_second = models.FloatField(null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="devices")

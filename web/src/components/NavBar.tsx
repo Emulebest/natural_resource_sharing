@@ -1,6 +1,5 @@
 import * as React from "react";
 import {inject, observer} from "mobx-react";
-import {UserStore} from "../store/user";
 import {Link} from "react-router-dom"
 import "../styles/navbar.css"
 import {LoggedStore} from "../store/logged";
@@ -10,6 +9,7 @@ import {Redirect, withRouter} from "react-router";
 import {DeviceStore} from "../store/devices";
 import {WaterStore} from "../store/water";
 import {WalletStore} from "../store/wallet";
+import {MarketStore} from "../store/market";
 
 interface Props {
 
@@ -19,12 +19,12 @@ interface InjectedProps extends Props {
     logged: LoggedStore,
     profile: ProfileStore,
     devices: DeviceStore,
-    users: UserStore,
     water: WaterStore,
-    wallet: WalletStore
+    wallet: WalletStore,
+    market: MarketStore
 }
 
-@inject("logged", "profile", "devices", "users", "water", "wallet")
+@inject("logged", "profile", "devices", "water", "wallet", "market")
 // @ts-ignore
 @withRouter
 @observer
@@ -42,9 +42,9 @@ export class NavBar extends React.Component<Props, {}> {
         this.setState({is_logged: false});
         this.injected.devices.emptyStore();
         this.injected.profile.emptyStore();
-        this.injected.users.emptyStore();
         this.injected.water.emptyStore();
         this.injected.wallet.emptyStore();
+        this.injected.market.emptyStore();
     };
 
     render() {
@@ -55,7 +55,7 @@ export class NavBar extends React.Component<Props, {}> {
                         I am nav bar
                     </h1>
                     <ul>
-                        <li><Link to={"/users"}>Users</Link></li>
+                        <li><Link to={"/market"}>Market</Link></li>
                         <li><Link to={"/home"}>Home</Link></li>
                         <li><Link to={"/my_profile"}>Profile</Link></li>
                         <li><Link to={"/devices"}>Devices</Link></li>
