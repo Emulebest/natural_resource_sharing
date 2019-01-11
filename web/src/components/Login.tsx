@@ -53,60 +53,39 @@ export class Login extends React.Component<Props> {
     render() {
         if (!this.state.redirect) {
             return (
-                <div className="limiter">
-                    <div className="container-login100">
-                        <div className="wrap-login100">
-                            <div className="login100-form validate-form">
-					<span className="login100-form-title p-b-34">
-						Natural resource sharing
-					</span>
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                                <div className="wrap-input100 rs1-wrap-input100 validate-input m-b-20">
-                                    <input id="first-name" type="text" className="input100" placeholder="Username"
-                           onChange={(e) => this.setState({username: e.target.value})}/>
-                                        <span className="focus-input100"></span>
-                                </div>
-                                <div className="wrap-input100 rs2-wrap-input100 validate-input m-b-20">
-                                    <input className="input100" type="text" placeholder="Email" onChange={(e) =>
+                    <div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Username</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Enter username"
+                                   onChange={(e) => this.setState({username: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Email address</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Enter email" onChange={(e) =>
                                         this.setState({email: e.target.value})}/>
-                                        <span className="focus-input100"></span>
-                                </div>
-                                <div className="wrap-input100 rs3-wrap-input100 validate-input m-b-20">
-                                    <input className="input100" type="password" name="pass" placeholder="Password"
-                           onChange={(e) => this.setState({password: e.target.value})}/>
-                                        <span className="focus-input100"></span>
-                                </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputPassword1">Password</label>
+                            <input type="text" className="form-control" name="password" id="password"
+                                   placeholder="Password" onChange={(e) => this.setState({password: e.target.value})}/>
+                        </div>
+                        <div className="form-check">
 
-                                <div className="container-login100-form-btn">
-                                    <button className="login100-form-btn" onClick={this.handleSubmit}>
-                                        Sign in
-                                    </button>
-                                </div>
-
-
-                                <div className="w-full text-center ">
+                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+                            <div className="w-full text-center ">
                                     <Link to={"/register"}> Sign Up </Link>
                                 </div>
-                            </div>
-
-                            <div className="login100-more"></div>
                         </div>
-                    </div>
-                </div>
 
-            // <div>
-            //         <input type="text" placeholder="Username"
-            //                onChange={(e) => this.setState({username: e.target.value})}/>
-            //         <input type="text" placeholder="Email" onChange={(e) => this.setState({email: e.target.value})}/>
-            //         <input type="text" placeholder="Password"
-            //                onChange={(e) => this.setState({password: e.target.value})}/>
-            //         {this.state.error === "" ? null : <h2>{this.state.error}</h2>}
-            //         <button onClick={this.handleSubmit}>Submit</button>
-            //         <div>
-            //             <h3>Don't have an account?</h3>
-            //             <Link to={"/register"}> Register </Link>
-            //         </div>
-            //     </div>
+                    </div>
+
+
+
+                </div>
             )
         } else {
             return (

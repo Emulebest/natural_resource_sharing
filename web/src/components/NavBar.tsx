@@ -2,7 +2,7 @@ import * as React from "react";
 import {inject, observer} from "mobx-react";
 import {UserStore} from "../store/user";
 import {Link} from "react-router-dom"
-import "../styles/navbar.css"
+
 import {LoggedStore} from "../store/logged";
 import {ProfileStore} from "../store/profile";
 import {httpWithHeaders} from "../utils/custom_http";
@@ -10,7 +10,7 @@ import {Redirect, withRouter} from "react-router";
 import {DeviceStore} from "../store/devices";
 import {WaterStore} from "../store/water";
 import {WalletStore} from "../store/wallet";
-
+import "../styles/navbar.css"
 interface Props {
 
 }
@@ -75,11 +75,6 @@ export class NavBar extends React.Component<Props, {}> {
                                 <a className="nav-link"><a href={"/logout"} onClick={this.logout}>Logout</a></a>
                             </li>
                         </ul>
-                        <div className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search"
-                                   aria-label="Search"/>
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </div>
                     </div>
                 </nav>
             )
