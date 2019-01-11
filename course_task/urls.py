@@ -22,7 +22,8 @@ main_urls = [
     path('profile/', include('user_profile.urls')),
     path('device/', include('device.urls')),
     path('water/', include('water.urls')),
-    path('wallet/', include('wallet.urls'))
+    path('wallet/', include('wallet.urls')),
+    path('transaction/', include('transaction.urls')),
 ]
 
 urlpatterns = [
