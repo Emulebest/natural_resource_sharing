@@ -47,18 +47,29 @@ export class WaterWallet extends React.Component {
     render() {
         return (
             <div>
+
                 <h2>Your wallet balance: {this.injected.wallet.amount} ETH</h2>
                 <h2>Your wallet address: {this.injected.wallet.address} </h2>
                 <h2>Your water supply: {this.injected.water.amount} liters</h2>
-                <button onClick={() => this.setState({open: true})}>Added more water?</button>
+                <button className="btn btn-primary" onClick={() => this.setState({open: true})}>Added more water?</button>
                 <Modal onClose={() => {
                     this.setState({open: false})
                 }} open={this.state.open}>
-                    <input type="number" onChange={(e) => {
+                    <div className="col-xs-6">
+                            <label htmlFor="first_name"><h4>Purpose</h4></label>
+                            <input type="number" className="form-control"
+                                   placeholder="Number" onChange={(e) => {
                         this.setState({amount: parseFloat(e.target.value)})
                     }}/>
-                    <button onClick={() => this.add(this.state.amount)}>Add</button>
-                    <button onClick={() => this.decrease(this.state.amount)}>Decrease</button>
+                            </div>
+                    <div className="col-xs-6">
+                    <br/>
+                        <br/>
+                    <button type="submit" className="btn btn-primary" onClick={() => this.add(this.state.amount)}>Add</button>
+                        <button className="btn btn-primary" onClick={() => this.decrease(this.state.amount)}>Decrease</button>
+                    </div>
+
+
                 </Modal>
             </div>
         )
