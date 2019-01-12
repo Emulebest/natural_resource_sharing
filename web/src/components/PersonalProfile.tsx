@@ -21,7 +21,11 @@ export class PersonalProfile extends React.Component<Props> {
         name: "",
         surname: "",
         city: "",
-        country: ""
+        country: "",
+        email: "",
+        username: "",
+        password: ""
+
     };
 
     get injected() {
@@ -35,6 +39,9 @@ export class PersonalProfile extends React.Component<Props> {
             surname: res.data.surname,
             city: res.data.city,
             country: res.data.country,
+            email: res.data.email,
+            password: res.data.password,
+            username: res.data.username,
         })
 
     }
@@ -44,46 +51,103 @@ export class PersonalProfile extends React.Component<Props> {
             name: this.state.name,
             surname: this.state.surname,
             city: this.state.city,
-            country: this.state.country
+            country: this.state.country,
+            email: this.state.email
         });
     };
 
     render() {
         return (
-            <div className="w3-main">
 
+            <div className="content py-5  bg-light">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8 offset-md-2">
+                            <span className="anchor" id="formUserEdit"></span>
 
-            <div className="form-w3l">
-                <div className="img">
-                    <img src="images/profile.jpg" alt="image"/>
-                        <h2>Personal Profile</h2>
-                </div>
-                <div>
-                    <div className="w3l-user">
-                        <span><i className="fa fa-user-circle-o w3l-1" aria-hidden="true"></i></span>
-                        <input type="text" name="username" placeholder="username" value={this.state.name}
+                            <div className="card card-outline-secondary">
+                                <div className="card-header">
+                                    <h3 className="mb-0">User Information</h3>
+                                </div>
+                                <div className="card-body">
+                                    <div className="form">
+                                        <div className="form-group row">
+                                            <label className="col-lg-3 col-form-label form-control-label">First
+                                                name</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value={this.state.name}
                                onChange={(e) => this.setState({name: e.target.value})}/>
-                    </div>
-
-                    <div className="w3l-user">
-                        <span><i className="fa fa-user-circle-o w3l-1" aria-hidden="true"></i></span>
-                            <input type="text" value={this.state.surname}
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label className="col-lg-3 col-form-label form-control-label">Last
+                                                name</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value={this.state.surname}
                             onChange={(e) => this.setState({surname: e.target.value})}/>
-                    </div>
-
-                    <div className="w3l-phone">
-                        <span><i className="fa fa-mobile w3l-4" aria-hidden="true"></i></span>
-                        <input type="text" value={this.state.city} onChange={(e) => this.setState({city: e.target.value})}/>
-                <input type="text" value={this.state.country}
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label className="col-lg-3 col-form-label form-control-label">Email</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value={this.state.email}
+                                                       onChange={(e) => this.setState({email: e.target.value})}/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label
+                                                className="col-lg-3 col-form-label form-control-label">City</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value={this.state.city}
+                                                       onChange={(e) => this.setState({city: e.target.value})}/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label
+                                                className="col-lg-3 col-form-label form-control-label">Country</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value={this.state.country}
                        onChange={(e) => this.setState({country: e.target.value})}/>
-                    </div>
+                                            </div>
+                                        </div>
 
-                    <div className="w3l-btn">
-                        <button onClick={this.handleSubmit}>Submit</button>
+                                        <div className="form-group row">
+                                            <label
+                                                className="col-lg-3 col-form-label form-control-label">Username</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="text" value="janeuser"/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label
+                                                className="col-lg-3 col-form-label form-control-label">Password</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="password" value="11111122333"/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label
+                                                className="col-lg-3 col-form-label form-control-label">Confirm</label>
+                                            <div className="col-lg-9">
+                                                <input className="form-control" type="password" value="11111122333"/>
+                                            </div>
+                                        </div>
+                                        <div className="form-group row">
+                                            <label className="col-lg-3 col-form-label form-control-label"></label>
+                                            <div className="col-lg-9">
+                                                    <input type="button" className="btn btn-primary"
+                                                           value="Save Changes" onClick={this.handleSubmit}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
- </div>
+
+
         )
     }
 }

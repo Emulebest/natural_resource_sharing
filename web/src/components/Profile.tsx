@@ -49,6 +49,18 @@ export class Profile extends React.Component<Props> {
             )
         } else {
             return (
+
+
+
+
+
+
+
+
+
+
+
+
                 <div className="form" id="registrationForm">
                 <div>
                     <div className="form-group">
