@@ -15,7 +15,7 @@ from web3.eth import Eth
 
 
 def transfer(to_address, from_address, value):
-    w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
+    w3 = Web3(Web3.HTTPProvider("http://parity:8545"))
     eth = Eth(w3)
     trans = eth.sendTransaction({"to": to_address, "from": from_address,
                                  "value": value})

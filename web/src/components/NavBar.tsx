@@ -1,7 +1,7 @@
 import * as React from "react";
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom"
-import "../styles/navbar.css"
+
 import {LoggedStore} from "../store/logged";
 import {ProfileStore} from "../store/profile";
 import {httpWithHeaders} from "../utils/custom_http";
@@ -10,6 +10,8 @@ import {DeviceStore} from "../store/devices";
 import {WaterStore} from "../store/water";
 import {WalletStore} from "../store/wallet";
 import {MarketStore} from "../store/market";
+
+import "../styles/navbar.css"
 
 interface Props {
 
@@ -50,19 +52,35 @@ export class NavBar extends React.Component<Props, {}> {
     render() {
         if (this.injected.logged.is_logged && this.injected.profile.profile_isset) {
             return (
-                <>
-                    <h1>
-                        I am nav bar
-                    </h1>
-                    <ul>
-                        <li><Link to={"/market"}>Market</Link></li>
-                        <li><Link to={"/home"}>Home</Link></li>
-                        <li><Link to={"/my_profile"}>Profile</Link></li>
-                        <li><Link to={"/devices"}>Devices</Link></li>
-                        <li><Link to={"/water"}>Water supply & Wallet</Link></li>
-                        <li><a href={"/logout"} onClick={this.logout}>Logout</a></li>
-                    </ul>
-                </>
+                <nav className="navbar navbar-default">
+                    <div className="container">
+                        <div className="navbar-header">
+                            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-collapse-2">
+                                <span className="sr-only">Toggle navigation</span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                                <span className="icon-bar"></span>
+                            </button>
+                            <a className="navbar-brand" href="#">Brand</a>
+                        </div>
+                        <div className="collapse navbar-collapse" id="navbar-collapse-2">
+                            <ul className="nav navbar-nav navbar-right">
+                                <li><a><Link to={"/home"}>Home</Link></a></li>
+                                <li><a><Link to={"/market"}>Market</Link></a></li>
+                                <li><a href="#"><Link to={"/my_profile"}>Profile</Link></a></li>
+                                <li><a href="#"><Link to={"/devices"}>Devices</Link></a></li>
+                                <li><a href="#"><Link to={"/water"}>Water supply & Wallet</Link></a></li>
+                                <li>
+                                    <a className="btn btn-default btn-outline btn-circle collapsed"
+                                       data-toggle="collapse" aria-expanded="false" aria-controls="nav-collapse2"
+                                       href={"/logout"} onClick={this.logout}>Logout</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
             )
         } else if (this.injected.logged.is_logged) {
             return (

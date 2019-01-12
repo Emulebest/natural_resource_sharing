@@ -23,7 +23,8 @@ module.exports = {
             include: path.join(__dirname, 'src')
         }, {
             test: /\.css$/,
-            use: ["style-loader", "css-loader"]
+           // use: ["style-loader", "css-loader"]
+             loader: "style-loader!css-loader"
         }],
     },
     devServer: {

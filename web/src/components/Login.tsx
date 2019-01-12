@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as ReactDOM from "react-dom";
 import {LoggedStore} from "../store/logged";
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom"
@@ -7,6 +8,7 @@ import {Redirect} from "react-router-dom"
 import {withRouter} from "react-router";
 import {httpWithHeaders} from "../utils/custom_http";
 import {ProfileStore} from "../store/profile";
+import "../styles/login.css"
 
 interface Props {
 
@@ -54,7 +56,7 @@ export class Login extends React.Component<Props> {
                 this.setState({error: "", redirectProfile: true})
             }
         } catch (e) {
-            this.setState({error: "Something went wrong"})
+            this.setState({error: "User is not found"})
         }
     };
 
@@ -66,23 +68,43 @@ export class Login extends React.Component<Props> {
         }
         if (!this.state.redirect) {
             return (
-                <div>
-                    <input type="text" placeholder="Username"
-                           onChange={(e) => this.setState({username: e.target.value})}/>
-                    <input type="text" placeholder="Email" onChange={(e) => this.setState({email: e.target.value})}/>
-                    <input type="text" placeholder="Password"
-                           onChange={(e) => this.setState({password: e.target.value})}/>
-                    {this.state.error === "" ? null : <h2>{this.state.error}</h2>}
-                    <button onClick={this.handleSubmit}>Submit</button>
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
                     <div>
-                        <h3>Don't have an account?</h3>
-                        <Link to={"/register"}> Register </Link>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Username</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Enter username"
+                                   onChange={(e) => this.setState({username: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputEmail1">Email address</label>
+                            <input type="text" className="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp" placeholder="Enter email" onChange={(e) =>
+                                        this.setState({email: e.target.value})}/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="exampleInputPassword1">Password</label>
+                            <input type="text" className="form-control" name="password" id="password"
+                                   placeholder="Password" onChange={(e) => this.setState({password: e.target.value})}/>
+                        </div>
+                        <div className="form-check">
+
+                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+                            <div className="w-full text-center ">
+                                    <Link to={"/register"}> Sign Up </Link>
+                                </div>
+                        </div>
+
                     </div>
+
+
+
                 </div>
             )
         } else {
             return (
-                <Redirect to={"/devices"}/>
+                <Redirect to={"/home"}/>
             )
         }
 
