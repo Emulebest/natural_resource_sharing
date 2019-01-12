@@ -25,7 +25,7 @@ export class MarketStore {
     };
 
     getActive(username: string): Transaction[] {
-        return this.pending.filter(request => request.mode !== "closed" && request.owner.username !== username)
+        return this.pending.filter(request => request.status !== "closed" && request.owner.username !== username)
     }
 
     sendTransaction = async (id: number) => {

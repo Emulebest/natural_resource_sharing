@@ -76,7 +76,7 @@ export class Market extends React.Component {
                             <h4>Buy/Sell: {request.mode}</h4>
                             <h4>Amount of water to transfer: {request.amount}</h4>
                             <h4>Price for liter in ETH: {request.price}</h4>
-                            <button onClick={() => this.setState({activeModal: request.id})}>{request.mode}ing?</button>
+                            <button onClick={() => this.setState({activeModal: request.id})}>{request.mode === "sell" ? "buy": "sell"}ing?</button>
                             <Modal onClose={this.close} open={this.state.activeModal === request.id}>
                                 <h2>Are you sure?</h2>
                                 <button onClick={() => this.sendTransaction(request.id)}>Yes</button>

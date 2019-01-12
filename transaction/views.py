@@ -36,15 +36,15 @@ class TransferWaterApiView(APIView):
         from_user = User.objects.get(id=from_user_id)
         to_user = User.objects.get(id=to_user_id)
         WaterTransaction.objects.create(from_user=from_user, to_user=to_user, req=water_req)
-        from_user.water.quantity -= water_req.amount
-        to_user.water.quantity += water_req.amount
+        from_user.water.quantity += water_req.amount
+        to_user.water.quantity -= water_req.amount
         from_user.water.save()
         to_user.water.save()
         water_req.status = "closed"
         water_req.save()
         p = Process(target=transfer, args=(to_user.wallet.address, from_user.wallet.address, wei_to_eth(water_req.amount * water_req.price)))
         p.start()
-        # TransferWaterApiView.send_water(from_user, water_req.amount)
+        TransferWaterApiView.send_water(to_user, water_req.amount)
         return Response({"status": "ok"})
 
     @staticmethod
