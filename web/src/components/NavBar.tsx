@@ -1,7 +1,6 @@
 import * as React from "react";
 import {inject, observer} from "mobx-react";
 import {Link} from "react-router-dom"
-
 import {LoggedStore} from "../store/logged";
 import {ProfileStore} from "../store/profile";
 import {httpWithHeaders} from "../utils/custom_http";
