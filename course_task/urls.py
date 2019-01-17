@@ -24,6 +24,7 @@ main_urls = [
     path('water/', include('water.urls')),
     path('wallet/', include('wallet.urls')),
     path('transaction/', include('transaction.urls')),
+    path('book/', include('library.urls')),
 ]
 
 urlpatterns = [

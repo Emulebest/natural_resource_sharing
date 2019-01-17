@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'device',
     'transaction',
     'water',
-    'corsheaders'
+    'corsheaders',
+    'library'
 ]
 
 MIDDLEWARE = [
@@ -145,4 +146,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 

@@ -62,15 +62,16 @@ export class NavBar extends React.Component<Props, {}> {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <a className="navbar-brand" href="#">Brand</a>
+
+                            <a className="navbar-brand" href="#">ETouch</a>
                         </div>
                         <div className="collapse navbar-collapse" id="navbar-collapse-2">
                             <ul className="nav navbar-nav navbar-right">
                                 <li><a><Link to={"/home"}>Home</Link></a></li>
-                                <li><a><Link to={"/market"}>Market</Link></a></li>
+                                <li><a><Link to={"/market"}>Library</Link></a></li>
                                 <li><a href="#"><Link to={"/my_profile"}>Profile</Link></a></li>
                                 <li><a href="#"><Link to={"/devices"}>Devices</Link></a></li>
-                                <li><a href="#"><Link to={"/water"}>Water supply & Wallet</Link></a></li>
+                                <li><a href="#"><Link to={"/water"}>Wallet</Link></a></li>
                                 <li>
                                     <a className="btn btn-default btn-outline btn-circle collapsed"
                                        data-toggle="collapse" aria-expanded="false" aria-controls="nav-collapse2"

@@ -49,6 +49,18 @@ export class Profile extends React.Component<Props> {
             )
         } else {
             return (
+
+
+
+
+
+
+
+
+
+
+
+
                 <div className="form" id="registrationForm">
                 <div>
                     <div className="form-group">
@@ -81,8 +93,8 @@ export class Profile extends React.Component<Props> {
                     <div className="form-group">
                         <div className="col-xs-12">
                             <br/>
-                                <button className="btn btn-lg btn-success" type="submit"><i
-                                    className="glyphicon glyphicon-ok-sign" onClick={this.handleSubmit}></i> Save
+                                <button className="btn btn-lg btn-success" type="submit" onClick={this.handleSubmit}><i
+                                    className="glyphicon glyphicon-ok-sign" ></i> Save
                                 </button>
                         </div>
                     </div>

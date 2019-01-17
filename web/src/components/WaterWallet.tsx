@@ -5,7 +5,7 @@ import {WaterStore} from "../store/water";
 import {WalletStore} from "../store/wallet";
 import Modal from 'react-responsive-modal';
 import {httpWithHeaders} from "../utils/custom_http";
-
+import "../styles/wallet.css";
 
 interface Props {
 
@@ -46,19 +46,45 @@ export class WaterWallet extends React.Component {
 
     render() {
         return (
+
             <div>
-                <h2>Your wallet balance: {this.injected.wallet.amount} ETH</h2>
-                <h2>Your wallet address: {this.injected.wallet.address} </h2>
-                <h2>Your water supply: {this.injected.water.amount} liters</h2>
-                <button onClick={() => this.setState({open: true})}>Added more water?</button>
+            <div className="card-deck mb-3 text-center">
+                <div className="card mb-4 shadow-sm">
+                    <div className="card-header">
+                        <h4 className="my-0 font-weight-normal">Free</h4>
+                    </div>
+                    <div className="card-body">
+                        <h1 className="card-title pricing-card-title">$0 <small className="text-muted">/ mo</small></h1>
+                        <ul className="list-unstyled mt-3 mb-4">
+                            <li>10 users included</li>
+                            <li>2 GB of storage</li>
+                            <li>Email support</li>
+                            <li>Help center access</li>
+                        </ul>
+                        <button type="button" className="btn btn-lg btn-block btn-outline-primary">Sign up for free
+                        </button>
+                    </div>
+                </div>
+
+</div>
                 <Modal onClose={() => {
                     this.setState({open: false})
                 }} open={this.state.open}>
-                    <input type="number" onChange={(e) => {
+                    <div className="col-xs-6">
+                            <label htmlFor="first_name"><h4>Purpose</h4></label>
+                            <input type="number" className="form-control"
+                                   placeholder="Number" onChange={(e) => {
                         this.setState({amount: parseFloat(e.target.value)})
                     }}/>
-                    <button onClick={() => this.add(this.state.amount)}>Add</button>
-                    <button onClick={() => this.decrease(this.state.amount)}>Decrease</button>
+                            </div>
+                    <div className="col-xs-6">
+                    <br/>
+                        <br/>
+                    <button type="submit" className="btn btn-primary" onClick={() => this.add(this.state.amount)}>Add</button>
+                        <button className="btn btn-primary" onClick={() => this.decrease(this.state.amount)}>Decrease</button>
+                    </div>
+
+
                 </Modal>
             </div>
         )

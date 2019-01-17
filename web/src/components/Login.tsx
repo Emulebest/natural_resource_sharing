@@ -90,7 +90,7 @@ export class Login extends React.Component<Props> {
                         </div>
                         <div className="form-check">
 
-                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+                            <button type="submit" className="btn btn-success" onClick={this.handleSubmit}>Sign In</button>
                             <div className="w-full text-center ">
                                     <Link to={"/register"}> Sign Up </Link>
                                 </div>

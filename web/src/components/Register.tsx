@@ -78,7 +78,7 @@ export class Register extends React.Component<Props> {
                     <div className="form-group">
                         <div className="col-xs-12">
                             <br/>
-                                <button className="btn btn-primary" type="submit"><i
+                                <button className="btn btn-success" onClick={() => this.handleSubmit()}><i
                                     className="glyphicon glyphicon-ok-sign"></i> Save
                                 </button>
                         </div>

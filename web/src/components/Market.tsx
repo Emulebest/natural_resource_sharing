@@ -1,10 +1,10 @@
 import * as React from "react";
-import {inject, observer} from "mobx-react";
-import {withRouter} from "react-router";
-import {MarketStore} from "../store/market";
+import { inject, observer } from "mobx-react";
+import { withRouter } from "react-router";
+import { MarketStore } from "../store/market";
 import Modal from 'react-responsive-modal';
-import {httpWithHeaders} from "../utils/custom_http";
-import {LoggedStore} from "../store/logged";
+import { httpWithHeaders } from "../utils/custom_http";
+import { LoggedStore } from "../store/logged";
 
 
 interface Props {
@@ -26,71 +26,83 @@ export class Market extends React.Component {
     }
 
     state = {
-        activeModal: null,
-        active: [],
+        name: "",
+        author: "",
+        num_pages: null,
+        num_symbols: null,
+        pub_house: "",
         open: false,
-        mode: "",
-        price: null,
-        amount: null
+        file: null
     };
 
     close = () => {
-        this.setState({activeModal: null})
+        this.setState({ activeModal: null })
     };
 
-    sendTransaction = async (id: number) => {
-        await this.injected.market.sendTransaction(id)
+    handleChange = (file: File) => {
+        this.setState({ file })
     };
 
-    filter = (mode) => {
-        this.setState({active: this.injected.market.getActive(this.injected.logged.current_username)});
-        const items = this.state.active.filter(item => item.mode === mode);
-        this.setState({active: items})
-    };
-
-    createRequest = async () => {
-        await httpWithHeaders().post("/transaction/transactions/", {
-            mode: this.state.mode,
-            price: this.state.price,
-            amount: this.state.amount
+    createBook = async () => {
+        const res = await httpWithHeaders().post("/book/books/", {
+            name: this.state.name,
+            author: this.state.author,
+            num_pages: this.state.num_pages,
+            num_symbols: this.state.num_symbols,
+            pub_house: this.state.pub_house,
+        });
+        const fd = new FormData();
+        fd.append("file", this.state.file);
+        fd.append("book", res.data.id);
+        await httpWithHeaders().post("/book/upload/", fd, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
+    };
+
+    read = async (id: number) => {
+        const res = await httpWithHeaders().get(`/book/read/${id}/`)
     };
 
 
     render() {
         return (
             <div>
-                <button onClick={() => this.filter("buy")}>Buy</button>
-                <button onClick={() => this.filter("sell")}>Sell</button>
-                <button onClick={() => this.setState({open: true})}>New water request</button>
-                <Modal onClose={() => this.setState({open: false})} open={this.state.open}>
-                    <input type="text" placeholder="mode" onChange={(e) => this.setState({mode: e.target.value})}/>
-                    <input type="number" onChange={(e) => this.setState({price: parseFloat(e.target.value)})}/>
-                    <input type="number" onChange={(e) => this.setState({amount: parseFloat(e.target.value)})}/>
-                    <button onClick={() => this.createRequest()}>Submit</button>
+                <button className="btn btn-primary" onClick={ () => this.setState({ open: true }) }>New book</button>
+                <Modal onClose={ () => this.setState({ open: false }) } open={ this.state.open }>
+                    <div>
+                        <input type="text" placeholder="Name"
+                               onChange={ (e) => this.setState({ name: e.target.value }) }/>
+                        <input type="text" placeholder="Author"
+                               onChange={ (e) => this.setState({ author: e.target.value }) }/>
+                        <input type="text" placeholder="Number of pages"
+                               onChange={ (e) => this.setState({ num_pages: parseInt(e.target.value) }) }/>
+                        <input type="text" placeholder="Number of symbols"
+                               onChange={ (e) => this.setState({ num_symbols: parseInt(e.target.value) }) }/>
+                        <input type="text" placeholder="Publishing house"
+                               onChange={ (e) => this.setState({ pub_house: e.target.value }) }/>
+                        <input type="file" onChange={ (e) => this.handleChange(e.target.files[0]) }/>
+                        <button className="btn btn-primary" onClick={ () => this.createBook() }>Submit</button>
+                    </div>
                 </Modal>
-                {this.state.active.map(request => {
+                { this.injected.market.books.map(request => {
                     return (
                         <div>
-                            <h4>Owner: {request.owner.username}</h4>
-                            <h4>Buy/Sell: {request.mode}</h4>
-                            <h4>Amount of water to transfer: {request.amount}</h4>
-                            <h4>Price for liter in ETH: {request.price}</h4>
-                            <button onClick={() => this.setState({activeModal: request.id})}>{request.mode}ing?</button>
-                            <Modal onClose={this.close} open={this.state.activeModal === request.id}>
-                                <h2>Are you sure?</h2>
-                                <button onClick={() => this.sendTransaction(request.id)}>Yes</button>
-                                <button onClick={() => this.close}>No</button>
-                            </Modal>
+                            <h4>Name: { request.name }</h4>
+                            <h4>Author: { request.author }</h4>
+                            <h4>Number of pages: { request.num_pages }</h4>
+                            <h4>Number of symbols: { request.num_symbols }</h4>
+                            <h4>Publishing house: { request.pub_house }</h4>
+                            <button onClick={() => this.read(request.id)}> Read book on device</button>
                         </div>
                     )
-                })}
+                }) }
             </div>
         )
     }
 
     async componentDidMount(): Promise<void> {
-        await this.injected.market.getPending();
-        this.setState({active: this.injected.market.getActive(this.injected.logged.current_username)})
+        await this.injected.market.getBooks();
     }
 }
